@@ -6,64 +6,69 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Formulario</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script defer src="js/comprobación.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
           integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
     <h1 class="display-1">Rellenemos un sencillo formulario...</h1>
-    <div class="{% if formularioVacio %}border border-danger{% endif %}">
-        <form action="/" method="post">
+    <div class="{% if formularioVacio %}border border-danger {% endif %}">
+        <form action="/" method="post" id="formulario">
             <div class="form-group">
                 <label for="nombre">Nombre</label>
                 <input type="text"
                        name="nombre" id="nombre"
                        class="form-control {% if erroresNombre %}border border-danger {% endif %}" placeholder="Nombre">
+                {% for error in erroresNombre %}
+                    <div class="alert alert-danger alert-dismissible error" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        <strong>{{ error }}</strong>
+                    </div>
+                {% endfor %}
             </div>
-            {% for error in erroresNombre %}
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    <strong>{{ error }}</strong>
-                </div>
-            {% endfor %}
+
 
             <div class="form-group">
                 <label for="apellidos">Apellidos</label>
                 <input type="text"
                        name="apellidos" id="apellidos" class="form-control {% if erroresApellidos %}border border-danger{% endif %}" placeholder="Apellidos">
+                {% for error in erroresApellidos %}
+                    <div class="alert alert-danger alert-dismissible error" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        <strong>{{ error }}</strong>
+                    </div>
+                {% endfor %}
+
             </div>
-            {% for error in erroresApellidos %}
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                <strong>{{ error }}</strong>
-            </div>
-            {% endfor %}
 
 
             <div class="form-group">
                 <label for="edad">Edad</label>
                 <input type="number"
                        name="edad" id="edad" class="form-control {% if erroresEdad %}border border-danger{% endif %}" placeholder="Edad">
+                {% for error in erroresEdad %}
+                    <div class="alert alert-danger alert-dismissible error" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        <strong>{{ error }}</strong>
+                    </div>
+                {% endfor %}
             </div>
-            {% for error in erroresEdad %}
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    <strong>{{ error }}</strong>
-                </div>
-            {% endfor %}
+
 
 
             {% if formularioVacio %}
-                <div class="alert alert-danger alert-dismissible" role="alert">
+                <div class="alert alert-danger alert-dismissible error" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
                     <strong>{{ formularioVacio }}</strong>
                 </div>
             {% endif %}
-            <button type="submit" class="btn btn-primary">Enviar</button>
+            <button type="submit" id="boton" class="btn btn-primary">Enviar</button>
         </form>
     </div>
 </div>
